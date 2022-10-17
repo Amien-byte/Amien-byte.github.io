@@ -1,0 +1,41 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.container{
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	background: #141414;
+}
+
+.menu{
+	background: black;
+	position: absolute;
+	top: 20vh;
+	left: 15vw;	
+	padding: 20px;
+	border: 1px solid white;
+	box-shadow: 0 0 50px 1px white;
+}
+
+.menu ul{
+	color: #c0c0c0;
+	font-size: 3rem;
+	list-style: none;
+}
+
+.menu ul li{
+    cursor: pointer;
+	margin: 8px 0 8px 0;
+	border-bottom: 1px solid black;
+	transition: 0.7s;
+}
+
+
+.menu ul li:hover{
+	border-bottom: 1px solid white;
+}
