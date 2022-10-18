@@ -37,9 +37,9 @@
 
 .background .innerD{
 	position: absolute;
-	transform: rotate(45deg);
-    width: 50px;
-    height: 50px;
+	transform: translate(1px,1px) rotate(45deg);
+    width: 48px;
+    height: 48px;
 	border: none;
 	box-shadow: 0 0 10px 0.1px white inset;
 }
@@ -54,9 +54,11 @@
 	position: absolute;
 	top: 20vh;
 	left: 15vw;	
-	padding: 20px;
 	border: 1px solid white;
 	box-shadow: 0 0 50px 1px white;
+	transition: 2s ease;
+	overflow: hidden;
+	max-height: 350px;
 }
 
 .menu ul{
@@ -67,14 +69,19 @@
 
 .menu ul li{
     cursor: pointer;
-	margin: 8px 0 8px 0;
+	margin: 15px;
 	border-bottom: 1px solid black;
 	transition: 0.7s;
 }
 
-
 .menu ul li:hover{
 	border-bottom: 1px solid white;
+}
+
+.focus{
+	top: 5vh;
+	left: 10vw;
+	max-height: 86.3px;
 }
 
 .option{
@@ -107,4 +114,50 @@
 	padding: 30px;
 	color: white;
 	cursor: default;
+}
+
+.about{
+	visibility: hidden;
+	position: absolute;
+	width: 100vw;
+	height: 150px;
+	transform-style: preserve-3d;
+	transition: opacity 2s ease-in;
+	opacity: 0;
+}
+
+.show{
+	visibility: visible;
+	opacity: 1;	
+}
+
+.about .title{
+	position: absolute;
+	top: 3vh;
+	width: 100%;
+	height: 100%;
+	transform-style: preserve-3d;	
+	animation: Text 24s linear infinite;
+}
+
+.about .title span{
+	position: absolute;
+	inset: 0;
+	transform: rotateX(calc(var(--i) * 15deg))
+}
+
+.about .title span:before{
+	content: 'Amien-byte';
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	color: white;
+	font-size: 3rem;
+	-webkit-text-stroke: 2px #959595;
+	text-shadow: 0 0 5px rgba(255,255,255,255.5);
+}
+
+@keyframes Text{
+	0%{transform: perspective(1000px) rotateX(0deg)}
+	100%{transform: perspective(1000px) rotateX(360deg)}
 }
