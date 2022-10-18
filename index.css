@@ -18,7 +18,7 @@
 .background .diamond{
 	position: absolute;
 	background: #141414;
-	border: 1px solid white;
+	border: 1px solid black;
 	transform: rotate(-45deg);
     width: 50px;
     height: 50px;
@@ -44,8 +44,9 @@
 	box-shadow: 0 0 10px 0.1px white inset;
 }
 
-.interactable{
+.foreground{
 	position: relative;
+	z-index: 100;
 }
 
 .menu{
@@ -56,7 +57,6 @@
 	padding: 20px;
 	border: 1px solid white;
 	box-shadow: 0 0 50px 1px white;
-	z-index: 10;
 }
 
 .menu ul{
@@ -75,4 +75,36 @@
 
 .menu ul li:hover{
 	border-bottom: 1px solid white;
+}
+
+.option{
+	padding-top: 10px;
+	background-color: rgba(0, 0, 0, 0);
+	z-index: 7;
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100vh;
+	width: 22px;
+	overflow: hidden;
+	padding-left:20px;
+	font-size: 10px;
+	font-family: "open sans";
+	transition: all .2s cubic-bezier(.68, -0.2, .27, 1.55);
+}
+
+.option:hover {
+   background-color: rgba(0, 0, 0, 0);
+   width: 350px;
+   overflow: hidden;
+}
+
+.page-info{
+	position: absolute;
+	top: 32vh;
+	left: 65vw;	
+	border-left: 1px solid #a4a4a4;
+	padding: 30px;
+	color: white;
+	cursor: default;
 }

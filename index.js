@@ -1,5 +1,6 @@
-const windowWidth = screen.availWidth
-const windowHeight = screen.availHeight
+const backgroundEl = document.querySelector('.background')
+const windowWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+const windowHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
 const backgroundContainer = document.querySelector('.background')
 const dist = 3;
 
