@@ -5,31 +5,6 @@ const dist = 3;
 
 
 background()
-backgroundEcho()
-
-function backgroundEcho(){	
-	const diamonds = Array.from(document.querySelectorAll('.diamond'))
-	
-	diamonds.forEach((diamond) => 
-		diamond.addEventListener('click', () => {
-			diamond.style.backgroundColor = 'white'
-			
-			for(let i = 1; i<=dist; i++){
-				diamonds.filter((d) =>(
-					(d.position.y === diamond.position.y - i && d.position.x === diamond.position.x) || 
-					(d.position.y === diamond.position.y + i && d.position.x === diamond.position.x) ||
-					(d.position.x === diamond.position.x - i && d.position.y === diamond.position.y) ||
-					(d.position.x === diamond.position.x + i && d.position.y === diamond.position.y) 
-					))
-				.forEach((d) => {
-					d.style.backgroundColor = 'white'
-					d.style.transitionDelay = i*0.7+'s'
-				})
-			}
-		})
-	)
-	
-}
 
 function background(){	
 	
@@ -40,21 +15,23 @@ function background(){
 			diamond.style.left = usedWidth + 'px'
 			diamond.style.top = usedHeight + 'px'
 			
-			diamond.position = {
-				x: usedWidth/70,
-				y: usedHeight/70
-			}
+			let innerD = document.createElement('div')
+			innerD.classList.add('innerD')
+			innerD.style.left = usedWidth + 'px'
+			innerD.style.top = usedHeight + 'px'
 			
-			// diamond.addEventListener('click', (mm) => {
-				// console.log(mm)
-				// const diamonds = document.querySelectorAll
-				// for(let i = 1; i<=dist; i++){
-					
-				// }
-				// mm.srcElement.style.backgroundColor = 'white'
-			// })
+			diamond.addEventListener('mouseover', () => {
+				diamond.style.animation = 'ppp 1s ease-out'
+				diamond.style.animationFillMode = 'forwards'
+			})
+		
+			diamond.addEventListener('animationend', () => {
+				diamond.style.animation = 'none'
+			})
+			
 			
 			backgroundContainer.appendChild(diamond)
+			backgroundContainer.appendChild(innerD)
 		}
 	}
 }
