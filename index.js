@@ -3,8 +3,10 @@ const windowHeight = Math.max(document.documentElement.clientHeight || 0, window
 const backgroundContainer = document.querySelector('.background')
 const menu = document.querySelector('.menu')
 const about = document.querySelector('.about')
+const works = document.querySelector('.works')
 const pageInfo = document.querySelector('.page-info')
 const list = document.querySelector('ul')
+const phone = document.querySelector('.phone')
 const listItemHeight = 71.3
 
 
@@ -58,6 +60,7 @@ const worksButton = document.querySelector('#works')
 worksButton.addEventListener('click',() => {
 	removeBackground()
 	
+	works.classList.add('show')
 	menu.classList.add('focus')
 	list.style.transform = 'translateY(-'+ listItemHeight +'px)'
 })
@@ -77,3 +80,14 @@ contactButton.addEventListener('click',() => {
 	menu.classList.add('focus')
 	list.style.transform = 'translateY(-'+ listItemHeight*3 +'px)'
 })
+
+let tempElement = null
+function delayTransition(elemented, bool = false){
+	if(!bool){
+		tempElement.style.opacity = 1
+	}
+	else{
+		tempElement = elemented
+		setTimeout(delayTransition,100)
+	}
+}

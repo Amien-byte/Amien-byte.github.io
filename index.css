@@ -126,10 +126,7 @@
 	opacity: 0;
 }
 
-.show{
-	visibility: visible;
-	opacity: 1;	
-}
+
 
 .about .title{
 	position: absolute;
@@ -160,4 +157,50 @@
 @keyframes Text{
 	0%{transform: perspective(1000px) rotateX(0deg)}
 	100%{transform: perspective(1000px) rotateX(360deg)}
+}
+
+.works{
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 1s;
+}
+
+.phone{
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.essential {
+	position: relative;
+	width: 188px;
+	height: 398px;
+	background: url('icons/GGF App.jpeg');
+	background-size: contain;
+	background-repeat: no-repeat;
+    background-position: center;
+	border-radius: 16px;
+	box-shadow: 0px 5px 0px 10px #000, 0px 0px 0px 10px #000;
+}
+
+.essential::before {
+	content: "";
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	background: #000;
+	top: 0px;
+	left: 50%;
+	transform: translate(-50%, 0);
+	border-radius: 0px 0px 50% 50%; 
+}
+
+
+
+.show{
+	visibility: visible;
+	opacity: 1;	
 }
