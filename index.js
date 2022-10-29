@@ -1,12 +1,15 @@
 const windowWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
 const windowHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+const container = document.querySelector('.container')
 const backgroundContainer = document.querySelector('.background')
 const menu = document.querySelector('.menu')
 const about = document.querySelector('.about')
 const works = document.querySelector('.works')
+const contact = document.querySelector('.contact')
 const pageInfo = document.querySelector('.page-info')
 const list = document.querySelector('ul')
 const phone = document.querySelector('.phone')
+const comet = document.querySelector('.comet')
 const listItemHeight = 71.3
 
 
@@ -65,21 +68,41 @@ worksButton.addEventListener('click',() => {
 	list.style.transform = 'translateY(-'+ listItemHeight +'px)'
 })
 
-const expertiseButton = document.querySelector('#expertise')
-expertiseButton.addEventListener('click',() => {
-	removeBackground()
-	
-	menu.classList.add('focus')
-	list.style.transform = 'translateY(-'+ listItemHeight*2 +'px)'
-})
-
 const contactButton = document.querySelector('#contact')
 contactButton.addEventListener('click',() => {
 	removeBackground()
 	
+	contact.classList.add('show')
 	menu.classList.add('focus')
-	list.style.transform = 'translateY(-'+ listItemHeight*3 +'px)'
+	
+	var cometPos = comet.getBoundingClientRect()
+	var menuPos = {top: (windowHeight * 5 / 100) + 86.3/2, left: (windowWidth * 10 / 100)+menu.clientWidth/2}
+	console.log({top: menu.clientHeight/2, left:  menu.clientWidth/2})
+		
+	var adjecent = Math.abs(cometPos.top - menuPos.top)
+    var opposite = Math.abs(cometPos.left - menuPos.left)
+	var hypotenuse = Math.hypot(adjecent,opposite)
+	
+	var sinOfAngleX = opposite / hypotenuse
+	var deg = Math.asin(sinOfAngleX) * 180/Math.PI
+	var rotateBy = 180 - deg + 'deg'
+	
+	console.log(hypotenuse,menuPos.top,menuPos.left)
+	
+	comet.style.transform = 'rotate('+ rotateBy +')'
+	comet.style.animation = 'fall 0.5s forwards'
+	comet.style.animationDelay = '1.2s'
+	
+	list.style.transform = 'translateY(-'+ listItemHeight*2 +'px)'
 })
+
+// const contactButton = document.querySelector('#contact')
+// contactButton.addEventListener('click',() => {
+	// removeBackground()
+	
+	// menu.classList.add('focus')
+	// list.style.transform = 'translateY(-'+ listItemHeight*3 +'px)'
+// })
 
 let tempElement = null
 function delayTransition(elemented, bool = false){
