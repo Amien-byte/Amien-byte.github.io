@@ -10,10 +10,11 @@ const pageInfo = document.querySelector('.page-info')
 const list = document.querySelector('ul')
 const phone = document.querySelector('.phone')
 const comet = document.querySelector('.comet')
+const book = document.querySelector('.book')
 const listItemHeight = 71.3
 
 
-//setBackground()
+// setBackground()
 
 function setBackground(){	
 	
@@ -29,7 +30,7 @@ function setBackground(){
 			innerD.style.left = usedWidth + 'px'
 			innerD.style.top = usedHeight + 'px'
 			
-			diamond.addEventListener('mouseover', () => {
+			diamond.addEventListener('mouseover', (d) => {
 				diamond.style.animation = 'ppp 1s ease-out'
 				diamond.style.animationFillMode = 'forwards'
 			})
@@ -45,15 +46,59 @@ function setBackground(){
 	}
 }
 
+function setLuminousBG(){
+	const glow = document.createElement('div')
+	const film = document.createElement('div')
+	glow.classList.add('glow')
+	film.classList.add('film')
+	film.addEventListener('mousemove', (d) => {
+		glow.style.top = d.clientY + 'px'
+		glow.style.left = d.clientX + 'px'
+		console.log(d)
+	})
+	backgroundContainer.appendChild(glow)
+	backgroundContainer.appendChild(film)
+	
+	for(let usedWidth = -70; usedWidth < windowWidth; usedWidth += 70){
+		for(let usedHeight = -70	; usedHeight < windowHeight; usedHeight += 70){
+			let diamond = document.createElement('div')
+			diamond.classList.add('diamond')
+			diamond.style.left = usedWidth + 'px'
+			diamond.style.top = usedHeight + 'px'
+			diamond.style.width = '48px'
+			diamond.style.height = '48px'
+			
+			let diagDiamond = document.createElement('div')
+			diagDiamond.classList.add('diamond')
+			diagDiamond.style.left = (usedWidth + 35) + 'px'
+			diagDiamond.style.top = (usedHeight + 35) + 'px'
+			diagDiamond.style.width = '48px'
+			diagDiamond.style.height = '48px'
+				
+			
+			backgroundContainer.appendChild(diamond)
+			backgroundContainer.appendChild(diagDiamond)
+		}
+	}
+}
+
 function removeBackground(){
 	Array.from(backgroundContainer.children).forEach((child) => child.remove())
 	
 	pageInfo.style.display = 'none'
 }
 
+book.addEventListener('click', () => {
+	document.querySelector('.front-cover').style.transform = 'perspective(1000px) rotateY(-180deg)'
+	const pop = document.querySelector('.front-cover')
+	delayTransition(pop,true)
+	document.querySelector('.back-cover').style.background = '#008000'
+})
+
 const aboutButton = document.querySelector('#about')
 aboutButton.addEventListener('click',() => {
 	removeBackground()
+	setLuminousBG()
 	
 	about.classList.add('show')
 	menu.classList.add('focus')
@@ -61,7 +106,7 @@ aboutButton.addEventListener('click',() => {
 
 const worksButton = document.querySelector('#works')
 worksButton.addEventListener('click',() => {
-	removeBackground()
+	// removeBackground()
 	
 	works.classList.add('show')
 	menu.classList.add('focus')
@@ -107,10 +152,10 @@ contactButton.addEventListener('click',() => {
 let tempElement = null
 function delayTransition(elemented, bool = false){
 	if(!bool){
-		tempElement.style.opacity = 1
+		tempElement.style.setProperty('--backPage', 'visible')
 	}
 	else{
 		tempElement = elemented
-		setTimeout(delayTransition,100)
+		setTimeout(delayTransition,400)
 	}
 }

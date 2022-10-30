@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Portfolio</title>
-	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="index.css">
 </head>
 <body>
@@ -29,7 +29,33 @@
 					<center id="totgif"><img src="icons/tot.gif" width = "120"/></center>
 				</div>
 			</div>
-		
+		<div class="book">
+			<div class="back-cover"></div>
+			<div class="pages">
+				<div class="page" style="--page:4">
+					<ul>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+				</div>
+				<div class="page" style="--page:3"></div>
+				<div class="page" style="--page:2"></div>
+				<div class="page" style="--page:1">
+					<ul>
+						<li style="--clr:#1da1f2"><i class="fa-brands fa-twitter"></i></li>
+						<li style="--clr:#dd2a7b"><i class="fa-brands fa-instagram"></i></li>
+						<li style="--clr:#4267B2"><i class="fa-brands fa-square-facebook"></i></li>
+						<li style="--clr:#000000"><i class="fa-brands fa-tiktok"></i></li>
+					</ul>
+				</div>
+			</div>
+			<div class="front-cover" style="--backPage: hidden">
+				<div class="binder"></div>
+				<p>Book</p>
+			</div>
+		</div>
 			<div class="page-info">
 				<h1>A Portfolio</h1>
 				<p>A portfolio page created by Amien-byte for the purpose of showcasing of skills and competence</p>
@@ -63,8 +89,8 @@
 					<span style="--i:24"></span>
 				</div>
 				<div class="content">
-					<p>Hey, my name is Amien Aziz. I’m a front-end and back-end web developer from Indonesia. I’m also passionate about pop music and make portraits and universes around what I listen to and I’m always curious to learn more when it comes to new technologies and creative coding.</p>
-					<a href="#">resume</a>
+					<p>Hey, my name is Amien Aziz. I’m a front-end and back-end web developer from Indonesia. I’m also passionate about pop music and make portraits and universes around what I listen to and I’m always curious to learn more when it comes to new technologies and creative coding. <a href="#">my resume</a></p>
+					
 				</div>
 			</div>
 			
@@ -81,12 +107,13 @@
 			<div class="contact">
 				<div class="title"></div>
 				<div class="content">
-					<ul>
-						<li>email</li>
-						<li>instagram</li>
-						<li>linkedin</li>
-						<li>github</li>
-					</ul>
+					<div class="book closed"></div>
+					<!-- <ul> -->
+						<!-- <li>email</li> -->
+						<!-- <li>instagram</li> -->
+						<!-- <li>linkedin</li> -->
+						<!-- <li>github</li> -->
+					<!-- </ul> -->
 				</div>
 			</div>
 		</div>
