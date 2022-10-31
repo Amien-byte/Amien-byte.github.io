@@ -9,12 +9,11 @@ const contact = document.querySelector('.contact')
 const pageInfo = document.querySelector('.page-info')
 const list = document.querySelector('ul')
 const phone = document.querySelector('.phone')
-const comet = document.querySelector('.comet')
 const book = document.querySelector('.book')
 const listItemHeight = 71.3
 
 
-// setBackground()
+setBackground()
 
 function setBackground(){	
 	
@@ -49,13 +48,16 @@ function setBackground(){
 function setLuminousBG(){
 	const glow = document.createElement('div')
 	const film = document.createElement('div')
+	const grad = document.createElement('div')
 	glow.classList.add('glow')
 	film.classList.add('film')
+	grad.classList.add('grad')
 	film.addEventListener('mousemove', (d) => {
 		glow.style.top = d.clientY + 'px'
 		glow.style.left = d.clientX + 'px'
-		console.log(d)
 	})
+	
+	backgroundContainer.appendChild(grad)
 	backgroundContainer.appendChild(glow)
 	backgroundContainer.appendChild(film)
 	
@@ -83,7 +85,20 @@ function setLuminousBG(){
 }
 
 function removeBackground(){
-	Array.from(backgroundContainer.children).forEach((child) => child.remove())
+	Array.from(document.querySelectorAll('.diamond')).forEach((child) => child.remove())
+	Array.from(document.querySelectorAll('.innerD')).forEach((child) => child.remove())
+	
+	
+	var temp = document.querySelector('.glow')
+	if(temp){
+		temp.remove()
+		document.querySelector('.film').remove()
+	}
+	
+		
+	about.classList.remove('show')
+	works.classList.remove('show')
+	contact.classList.remove('show')
 	
 	pageInfo.style.display = 'none'
 }
@@ -96,58 +111,104 @@ book.addEventListener('click', () => {
 })
 
 const aboutButton = document.querySelector('#about')
-aboutButton.addEventListener('click',() => {
+const aboutMiniButton = document.querySelector('#m-about')
+aboutButton.addEventListener('click',toAbout)
+aboutMiniButton.addEventListener('click',toAbout)
+
+function toAbout(){
 	removeBackground()
 	setLuminousBG()
 	
 	about.classList.add('show')
 	menu.classList.add('focus')
-})
+	list.style.transform = 'translateY(-'+ listItemHeight * 0 +'px)'
+}
 
 const worksButton = document.querySelector('#works')
-worksButton.addEventListener('click',() => {
-	// removeBackground()
+const worksMiniButton = document.querySelector('#m-works')
+worksButton.addEventListener('click',toWorks)
+worksMiniButton.addEventListener('click',toWorks)
+
+function createComet(x, menuPos){
+	let pos = [];
+	for(let i=0; i<x; i++){
+		let comet = document.createElement('div')
+		let x = Math.floor(Math.random() * windowWidth) 
+		let y = Math.floor(Math.random() * windowHeight) + menuPos.top
+		
+		comet.classList.add('comet')
+		comet.style.left = x + 'px'
+		comet.style.top = y + 'px'
+		
+		pos.push({top: y, left:x})
+		
+		backgroundContainer.appendChild(comet)
+	}
+	return pos;
+}
+
+function toWorks(){
+	removeBackground()
 	
 	works.classList.add('show')
 	menu.classList.add('focus')
+	
+	const x = 20
+	
+	const menuPos = {top: (windowHeight * 5 / 100) + 86.3/2, left: (windowWidth * 10 / 100)+menu.clientWidth/2}
+	const pos = createComet(x, menuPos)
+	const comets = document.querySelectorAll('.comet')
+	
+
+	for(let i=0; i<x; i++){
+		let comet = comets[i]
+		
+		var cometPos = pos[i]
+		
+		var opposite = 0
+		var adjecent = 0
+		
+		if(cometPos.left < menuPos.left){
+			opposite = Math.abs(cometPos.top - menuPos.top)
+			adjecent = Math.abs(cometPos.left - menuPos.left)
+			
+		}else{
+			adjecent = Math.abs(cometPos.top - menuPos.top)
+			opposite = Math.abs(cometPos.left - menuPos.left)
+		}
+		
+		var hypotenuse = Math.hypot(adjecent,opposite)
+		
+		var sinOfAngleX = opposite / hypotenuse
+		var deg = Math.asin(sinOfAngleX) * 180/Math.PI
+		var rotateBy = (cometPos.left < menuPos.left) ? 270 - deg + 'deg' : 180 - deg + 'deg'
+		
+		comet.style.setProperty('--dist', hypotenuse + 'px')
+		comet.style.setProperty('--fromX', cometPos.top + 'px')
+		comet.style.setProperty('--fromY', cometPos.left + 'px')
+		comet.style.setProperty('--toX', menuPos.top + 'px')
+		comet.style.setProperty('--toY', menuPos.left + 'px')
+		
+		comet.style.transform = 'rotate('+ rotateBy +')'
+		comet.style.animation = 'fall 1s forwards'
+		comet.style.animationDelay = '1.2s'
+	}
+	
 	list.style.transform = 'translateY(-'+ listItemHeight +'px)'
-})
+}
 
 const contactButton = document.querySelector('#contact')
-contactButton.addEventListener('click',() => {
+contactButton.addEventListener('click',toContacts)
+
+function toContacts(){
 	removeBackground()
 	
 	contact.classList.add('show')
 	menu.classList.add('focus')
 	
-	var cometPos = comet.getBoundingClientRect()
-	var menuPos = {top: (windowHeight * 5 / 100) + 86.3/2, left: (windowWidth * 10 / 100)+menu.clientWidth/2}
-	console.log({top: menu.clientHeight/2, left:  menu.clientWidth/2})
-		
-	var adjecent = Math.abs(cometPos.top - menuPos.top)
-    var opposite = Math.abs(cometPos.left - menuPos.left)
-	var hypotenuse = Math.hypot(adjecent,opposite)
-	
-	var sinOfAngleX = opposite / hypotenuse
-	var deg = Math.asin(sinOfAngleX) * 180/Math.PI
-	var rotateBy = 180 - deg + 'deg'
-	
-	console.log(hypotenuse,menuPos.top,menuPos.left)
-	
-	comet.style.transform = 'rotate('+ rotateBy +')'
-	comet.style.animation = 'fall 0.5s forwards'
-	comet.style.animationDelay = '1.2s'
-	
 	list.style.transform = 'translateY(-'+ listItemHeight*2 +'px)'
-})
+}
 
-// const contactButton = document.querySelector('#contact')
-// contactButton.addEventListener('click',() => {
-	// removeBackground()
-	
-	// menu.classList.add('focus')
-	// list.style.transform = 'translateY(-'+ listItemHeight*3 +'px)'
-// })
 
 let tempElement = null
 function delayTransition(elemented, bool = false){

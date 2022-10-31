@@ -4,16 +4,17 @@
 	<meta charset="UTF-8">
 	<title>Portfolio</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kolker+Brush"> -->
 	<link rel="stylesheet" href="index.css">
 </head>
-<body>
+<body onLoad="initClock()">
 	<div class="container">
 		<div class="background">
 			<!-- <div class="tail"></div> -->
 			<!-- <div class="head"> -->
 				<!-- <div class="eye"></div> -->
 			<!-- </div> -->
-			<div class="comet"></div>
+			<!-- <div class="comet"></div> -->
 		</div>
 		
 		<div class="foreground">
@@ -25,37 +26,26 @@
 				</ul>
 			</div>
 			<div class="option">
-				<div class="widget-box" id="content">
+				<div class="personal" id="content">
 					<center id="totgif"><img src="icons/tot.gif" width = "120"/></center>
 				</div>
-			</div>
-		<div class="book">
-			<div class="back-cover"></div>
-			<div class="pages">
-				<div class="page" style="--page:4">
-					<ul>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-					</ul>
+				<div id="timedate">
+					<a id="mon">January</a>
+					<a id="d">1</a>,
+					<a id="y">0</a><br />
+					<a id="h">12</a> :
+					<a id="m">00</a>:
+					<a id="s">00</a>:
+					<a id="mi">000</a>
 				</div>
-				<div class="page" style="--page:3"></div>
-				<div class="page" style="--page:2"></div>
-				<div class="page" style="--page:1">
+				<div class="mini-menu">
 					<ul>
-						<li style="--clr:#1da1f2"><i class="fa-brands fa-twitter"></i></li>
-						<li style="--clr:#dd2a7b"><i class="fa-brands fa-instagram"></i></li>
-						<li style="--clr:#4267B2"><i class="fa-brands fa-square-facebook"></i></li>
-						<li style="--clr:#000000"><i class="fa-brands fa-tiktok"></i></li>
+						<li id="m-about">About</li>
+						<li id="m-works">Works</li>
+						<li id="m-contact">Contact</li>
 					</ul>
 				</div>
 			</div>
-			<div class="front-cover" style="--backPage: hidden">
-				<div class="binder"></div>
-				<p>Book</p>
-			</div>
-		</div>
 			<div class="page-info">
 				<h1>A Portfolio</h1>
 				<p>A portfolio page created by Amien-byte for the purpose of showcasing of skills and competence</p>
@@ -100,26 +90,68 @@
 					<div class="phone">
 						<div class="essential" data-tilt data-tilt-max="20" data-tilt-speed="400" data-tilt-perspective="500"></div>
 					</div>
-					<p>I have once work as an intern at GGF as a mobile app developer. The app that i worked on was used as data retention in the company, therefore i also dabble at the back-end side of the app development, specifically the database and the API and am quite good at it.</p>
+					<p>I have once work as an intern at GGF as a mobile app developer. The app that i worked on was used as data retention in the company, therefore i also dabble at the back-end side of the app development, specifically the database and the API and am quite good at it.</br></br>I have also worked on a web development project with a team. This project is for the company <a href="https://www.belijelantah.com">Beli Jelantah.</a></p>
 				</div>
 			</div>
 			
 			<div class="contact">
 				<div class="title"></div>
 				<div class="content">
-					<div class="book closed"></div>
-					<!-- <ul> -->
-						<!-- <li>email</li> -->
-						<!-- <li>instagram</li> -->
-						<!-- <li>linkedin</li> -->
-						<!-- <li>github</li> -->
-					<!-- </ul> -->
+					<div class="book">
+						<div class="back-cover"></div>
+						<div class="pages">
+							<div class="page" style="--page:6"></div>
+							<div class="page" style="--page:5"></div>
+							<div class="page" style="--page:4"></div>
+							<div class="page" style="--page:3"></div>
+							<div class="page" style="--page:2"></div>
+							<div class="page" style="--page:1">
+								<ul>
+									<li style="--clr:#0077b5"><a href="https://www.linkedin.com/in/amienaziz55/"><i class="fa-brands fa-linkedin"></i></a></li>
+									<li style="--clr:#dd2a7b"><i class="fa-brands fa-instagram"></i></li>
+									<li style="--clr:#4078c0"><i class="fa-brands fa-github"></i></li>
+									<li style="--clr:#075e54"><i class="fa-brands fa-whatsapp"></i></li>
+								</ul>
+							</div>
+						</div>
+						<div class="front-cover" style="--backPage: hidden">
+							<div class="binder"></div>
+							<p>Book of Contacts</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 		
 	</div>
-	
+	<script>
+		Number.prototype.pad = function(n) {
+		  for (var r = this.toString(); r.length < n; r = 0 + r);
+		  return r;
+		};
+
+		function updateClock() {
+		  var now = new Date();
+		  var milli = now.getMilliseconds(),
+			sec = now.getSeconds(),
+			min = now.getMinutes(),
+			hou = now.getHours(),
+			mo = now.getMonth(),
+			dy = now.getDate(),
+			yr = now.getFullYear();
+		  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+		  var tags = ["mon", "d", "y", "h", "m", "s", "mi"],
+			corr = [months[mo], dy, yr, hou.pad(2), min.pad(2), sec.pad(2), milli];
+		  for (var i = 0; i < tags.length; i++)
+			document.getElementById(tags[i]).firstChild.nodeValue = corr[i];
+		}
+
+		function initClock() {
+		  updateClock();
+		  window.setInterval("updateClock()", 1);
+		}
+
+	</script>
 	<script type="text/javascript" src="vanilla-tilt.js"></script>
 	<script src="index.js"></script>
 </body>

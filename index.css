@@ -32,13 +32,14 @@ li{
 .background .glow{
 	position: absolute;
 	visibility: 0;
-	width: 74px;
-	height: 74px;
+	width: 200vw;
+	height: 200vw;
 	border-radius: 50%;
+	background: transparent;
 	top: 50vh;
 	left: 70vw;
 	transform: translate(-50%,-50%);
-	box-shadow: 0 0 200px 35px white;
+	box-shadow: 0 0 10px 94vw black inset;
 }
 
 .background .film{
@@ -46,6 +47,15 @@ li{
 	width: 100vw;
 	height: 100vh;
 	z-index: 2;
+}
+
+.background .grad{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
 }
 
 
@@ -122,9 +132,52 @@ li{
 }
 
 .option:hover {
-   background-color: rgba(0, 0, 0, 0);
+   background-color: rgba(0, 0, 0, 0.8);
    width: 350px;
    overflow: hidden;
+}
+
+.option .personal{
+	display: flex;
+	align-items: flex-start;
+}
+
+#timedate {
+  font: small-caps lighter 20px;
+  text-align:left;
+  width: 100%;
+  color:#fff;
+  padding: 20px;
+}
+
+.option:hover #timedate{
+  border-left: 3px solid #ed1f24;
+}
+
+.option .mini-menu{
+	margin-left: 5px;
+	color: white;
+	font-family: fontAwesome;
+	display:inline-block;
+}
+
+.option .mini-menu ul li{
+	margin: 10px auto;
+	cursor: pointer;
+}
+
+.option .mini-menu ul li:before{
+	margin-right: 5px;
+}
+
+.option .mini-menu ul li:nth-child(1):before{
+	content: '\f183';
+}
+.option .mini-menu ul li:nth-child(2):before{
+	content: '\f0b1';
+}
+.option .mini-menu ul li:nth-child(3):before{
+	content: '\f2b9';
 }
 
 .page-info{
@@ -305,17 +358,17 @@ li{
 	height: 1px;
 	border-radius: 25%;
 	background: white;
-	left: 400px;
-	top: 200px;
 	transform-origin: top left;
+	--fromX: 0;
+	--fromY: 0;
 	--toX: 0px;
 	--toY: 0px;
 	--dist: 0px;
 }
 
 @keyframes fall{
-	50%{height:272px; top: 200px; left: 400px}
-	100%{height: 1px: ;top: 72px;left:199px}
+	50%{height: var(--dist); top: var(--fromX); left: var(--fromY)}
+	100%{height: 1px: ;top: var(--toX);left:var(--toY)}
 }
 
 .glitch span {
@@ -660,16 +713,8 @@ li{
 	opacity: 0;
 }
 
-.contact ul{
-	position: absolute;
-    top: 50vh;
-    left: 20vw;
-    max-width: 496px;
-	color: antiquewhite;
-}
-
 .book{
-	position: relative;
+	position: absolute;
 	width: 400px;
 	height: 350px;
 	margin-top: 23vh;
@@ -678,13 +723,17 @@ li{
 }
 
 .book .front-cover{
-	position: relative;
-	width: 100%;
-	height: 100%;
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 400px;
+	height: 350px;
 	background: #008000;
 	border-radius: 0 5px 5px 0;
 	transition: 1s ease-out;
 	transform-origin: left;
+	z-index: 2;
 }
 
 .book .front-cover:after{
@@ -701,7 +750,8 @@ li{
 }
 
 .book p{
-	margin: 23px;
+	font-family: 'Kolker Brush', sans-serif;
+	font-size: 4rem;
 }
 
 .book .binder{
@@ -720,7 +770,7 @@ li{
 	background: white;
 	color: black;
 	margin-top: 5px;
-	margin-left: calc((var(--page) * 1.5px) + 3px);
+	margin-left: calc((var(--page) * 2px) + 3px);
 	box-shadow: 1px 0px 4px -2px rgb(0,0,0,.7), 5px 0px 10px -4px rgb(0,0,0,.7) inset;
 }
 
@@ -764,6 +814,10 @@ li{
 	height: 100%;
 }
 
+.book .pages .page ul li a{
+	z-index: 1;
+}
+
 .book .pages .page ul li .fa-brands{
 	font-size: 6rem;
 	color: transparent;
@@ -771,7 +825,7 @@ li{
 }
 
 .book .pages .page ul li:nth-child(1):before{
-	content: '\f099';
+	content: '\f08c';
 }
 
 .book .pages .page ul li:nth-child(2):before{
@@ -779,11 +833,11 @@ li{
 }
 
 .book .pages .page ul li:nth-child(3):before{
-	content: '\f082';
+	content: '\f09b';
 }
 
 .book .pages .page ul li:nth-child(4):before{
-	content: '\e07b';
+	content: '\f232';
 }
 
 .book .back-cover{
